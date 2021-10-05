@@ -26,5 +26,11 @@ const styles=StyleSheet.create({
     buttonContainer:{
         paddingHorizontal:THEME.PADDING.SUPERHIGH
     },
+    indicator:{
+        position:'absolute',
+        justifyContent:'center',
+        alignItems:'center',
+        flex:1
+    },
 })
 export default styles

@@ -4,11 +4,13 @@ import { RFValue } from 'react-native-responsive-fontsize'
 import {THEME} from '../../theme/index'
 interface props {
     placeHolder?:string
+    value?:string
+    onChange?:()=>void
 }
 const AddressInput = (props:props) => {
     return(
         <View style={styles.mainView}>
-            <TextInput placeholder={props.placeHolder} placeholderTextColor={THEME.COLORS.accentBlue}/>
+            <TextInput placeholder={props.placeHolder} placeholderTextColor={THEME.COLORS.accentBlue} value={props.value} onChangeText={props.onChange}/>
         </View>
     )
 }
