@@ -11,6 +11,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('abdul.rehman@kryptomind.com');
   const [password, setPassword] = useState('03356278648Bsse@');
   const [isVisible, setVisible] = useState(false);
+  const [passwordVisible,setPassVisible]=useState(false)
   const navigation=useNavigation()
   const onLogin = () => {
     setVisible(true);
@@ -51,6 +52,9 @@ const LoginScreen = () => {
       <AddressInput
         placeHolder="Enter Password"
         value={password}
+        isPassword
+        isVisible={passwordVisible}
+        onPress={()=>setPassVisible(!passwordVisible)}
         onChange={text => setPassword(text)}
       />
       <Text style={styles.forgetText}>forget Password?</Text>
