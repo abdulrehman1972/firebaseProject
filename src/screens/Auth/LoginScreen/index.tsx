@@ -6,11 +6,12 @@ import styles from './styles';
 import auth from '@react-native-firebase/auth';
 import {THEME} from '../../../shared/theme';
 import Toast from 'react-native-simple-toast';
-
+import { useNavigation } from '@react-navigation/native';
 const LoginScreen = () => {
   const [email, setEmail] = useState('abdul.rehman@kryptomind.com');
   const [password, setPassword] = useState('03356278648Bsse@');
   const [isVisible, setVisible] = useState(false);
+  const navigation=useNavigation()
   const onLogin = () => {
     setVisible(true);
     let emailVal = email.search('@');
@@ -21,6 +22,8 @@ const LoginScreen = () => {
           console.log('Sign in Successful');
           setVisible(false);
           Toast.show('Sign in Successful', Toast.LONG);
+          navigation.navigate('FeedMain')
+          
         })
         .catch(error => {
           console.log(error);

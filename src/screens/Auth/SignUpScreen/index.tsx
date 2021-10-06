@@ -6,13 +6,13 @@ import styles from './styles';
 import auth from '@react-native-firebase/auth';
 import {THEME} from '../../../shared/theme';
 import Toast from 'react-native-simple-toast';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 const LoginScreen = () => {
   const [email, setEmail] = useState('abdul.rehman@kryptomind.com');
   const [password, setPassword] = useState('03356278648Bsse@');
   const [confirmPassword, setConfirmPassword] = useState('03356278648Bsse@');
   const [isVisible, setVisible] = useState(false);
-  const navigation = useNavigation();
+  const navigation=useNavigation();
   const onSignUp = () => {
     setVisible(true);
     let emailVal = email.search('@');
@@ -22,7 +22,7 @@ const LoginScreen = () => {
         .then(() => {
           console.log('User account created & signed in!');
           Toast.show('User account created & signed in!', Toast.SHORT);
-          navigation.navigate('LoginScreen');
+          navigation.navigate('LoginScreen')
           setVisible(false);
         })
         .catch(error => {
