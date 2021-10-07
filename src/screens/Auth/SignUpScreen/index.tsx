@@ -11,6 +11,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('abdul.rehman@kryptomind.com');
   const [password, setPassword] = useState('03356278648Bsse@');
   const [confirmPassword, setConfirmPassword] = useState('03356278648Bsse@');
+  const [userName, setUserName] = useState('Dula Mani');
   const [isVisible, setVisible] = useState(false);
   const navigation = useNavigation();
   const onSignUp = () => {
@@ -55,6 +56,11 @@ const LoginScreen = () => {
         placeHolder="Enter Email"
         value={email}
         onChange={text => setEmail(text)}
+      />
+      <AddressInput
+        placeHolder="Enter UserName"
+        value={userName}
+        onChange={text => setUserName(text)}
       />
       <AddressInput
         placeHolder="Enter Password"
