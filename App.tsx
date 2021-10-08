@@ -7,17 +7,19 @@
  */
 
 import React, {useState} from 'react';
-import type {Node} from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import AuthStack from './src/routes/Auth/Auth.routes';
-const App: () => Node = () => {
-  
+import {Provider} from 'react-redux';
+import {store} from './src/shared/store';
+interface props {}
+const App = (props: props) => {
   return (
-   <NavigationContainer>
-     <AuthStack/>
-   </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <AuthStack />
+      </NavigationContainer>
+    </Provider>
   );
 };
-
 
 export default App;

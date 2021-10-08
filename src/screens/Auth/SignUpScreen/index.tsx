@@ -6,14 +6,28 @@ import styles from './styles';
 import auth from '@react-native-firebase/auth';
 import {THEME} from '../../../shared/theme';
 import Toast from 'react-native-simple-toast';
-import { useNavigation } from '@react-navigation/native';
-const LoginScreen = () => {
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {GenericNavigation} from '../../../shared/Modals/types';
+import {
+  setEm,
+  setPass,
+  setUser,
+} from '../../../shared/store/Reducer/WalletReducer/WalletReducer';
+
+interface props extends GenericNavigation {}
+
+const LoginScreen = (props: props) => {
   const [email, setEmail] = useState('abdul.rehman@kryptomind.com');
   const [password, setPassword] = useState('03356278648Bsse@');
   const [confirmPassword, setConfirmPassword] = useState('03356278648Bsse@');
-  const [userName, setUserName] = useState('Dula Mani');
+  const [passwordVisible, setPasswordVisible] = useState(true);
+  const [confirmPassVisible, setConfirmPassVisible] = useState(true);
+  const [userName, setUserName] = useState('Abdul Rehman');
   const [isVisible, setVisible] = useState(false);
-  const navigation=useNavigation();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const onSignUp = () => {
     setVisible(true);
     let emailVal = email.search('@');
@@ -22,8 +36,11 @@ const LoginScreen = () => {
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
           console.log('User account created & signed in!');
-          Toast.show('User account created & signed in!', Toast.SHORT);
-          navigation.navigate('LoginScreen')
+          Toast.show('User account created', Toast.SHORT);
+          dispatch(setEm(email));
+          dispatch(setPass(password));
+          dispatch(setUser(userName));
+          navigation.navigate('LoginScreen');
           setVisible(false);
         })
         .catch(error => {
@@ -41,6 +58,7 @@ const LoginScreen = () => {
       setVisible(false);
     }
   };
+
   return (
     <View style={styles.mainContainer}>
       {isVisible && (
@@ -53,24 +71,32 @@ const LoginScreen = () => {
       <Text style={styles.titleText}>Hello</Text>
       <Text style={styles.descriptionText}>Welcome To FireBase SignUp</Text>
       <AddressInput
-        placeHolder="Enter Email"
+        placeholder="Enter Email"
         value={email}
-        onChange={text => setEmail(text)}
+        onChangeText={text => setEmail(text)}
       />
       <AddressInput
-        placeHolder="Enter UserName"
+        placeholder="Enter UserName"
         value={userName}
-        onChange={text => setUserName(text)}
+        onChangeText={text => setUserName(text)}
       />
       <AddressInput
-        placeHolder="Enter Password"
+        placeholder="Enter Password"
         value={password}
-        onChange={text => setPassword(text)}
+        isPassword
+        isVisible={passwordVisible}
+        secureTextEntry={passwordVisible}
+        onPress={() => setPasswordVisible(!passwordVisible)}
+        onChangeText={text => setPassword(text)}
       />
       <AddressInput
-        placeHolder="Enter Password Again"
+        placeholder="Enter Password Again"
         value={confirmPassword}
-        onChange={text => setConfirmPassword(text)}
+        isPassword
+        isVisible={confirmPassVisible}
+        secureTextEntry={confirmPassVisible}
+        onPress={() => setConfirmPassVisible(!confirmPassVisible)}
+        onChangeText={text => setConfirmPassword(text)}
       />
       <View style={styles.buttonContainer}>
         <PrimaryButton title="Sign Up" onPress={onSignUp} />

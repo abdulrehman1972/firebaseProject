@@ -1,8 +1,11 @@
 import React,{useState} from 'react'
-import {View,Text,StyleSheet,Image,TouchableOpacity,StyleProp,TextStyle} from 'react-native'
+import {View,Text,StyleSheet,Image,TouchableOpacity} from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
-import { ICONS } from '../../../assets'
+import Icon from 'react-native-vector-icons/AntDesign'
+import FontIcon from 'react-native-vector-icons/FontAwesome'
 import { THEME } from '../../theme'
+import {useSelector} from 'react-redux'
+import { RootState } from '../../../shared/store'
 interface props {
     uri?:string;
     postContent?:string;
@@ -11,22 +14,32 @@ interface props {
 }
 const FeedCard = (props:props) => {
     const [isLike,setLike]=useState(false)
+    const isDarkMode =useSelector((state:RootState)=>state.message.isDarkMode)
     return(
-        <View style={styles.mainContainer}>
+        <View style={isDarkMode ? styles.mainContainerDark:styles.mainContainer}>
             <Image source={{uri:props.uri}} style={styles.postImage} resizeMode='cover'/>
-            <View style={styles.detailView}>
+            <View style={isDarkMode ? styles.detailViewDark : styles.detailView}>
                 <View style={styles.descriptionView}>
             <Text numberOfLines={2} ellipsizeMode='tail'>{props.postContent}</Text>
             </View>
             <View style={styles.reactionView}>
                 <TouchableOpacity onPress={()=>setLike(!isLike)}>
-                <View><Text style={isLike==true?styles.blueColor:null}>Like</Text></View>
+                <View style={styles.iconView}>
+                    <Icon name='like2' size={25} color={isLike?THEME.COLORS.blue:THEME.COLORS.black}/>
+                    <Text style={isLike==true?styles.blueColor:styles.simpleColor}>Like</Text>
+                    </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={props.onPressComment}>
-                <View><Text>Comment</Text></View>
+                <View style={styles.iconView}>
+                    <FontIcon name='comment-o' size={25} color={THEME.COLORS.black}/>
+                    <Text style={styles.simpleColor}>Comment</Text>
+                    </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={props.onPressShare}>
-                <View><Text>Share</Text></View>
+                <View style={styles.iconView}>
+                    <Icon name='sharealt' size={25} color={THEME.COLORS.black}/>
+                    <Text style={styles.simpleColor}>Share</Text>
+                    </View>
                 </TouchableOpacity>
             </View>
             </View>
@@ -34,6 +47,9 @@ const FeedCard = (props:props) => {
     )
 }
 const styles=StyleSheet.create({
+    iconView:{
+        flexDirection:'row'
+    },
     reactionView:{
         flexDirection:'row',
         justifyContent:'space-between',
@@ -50,8 +66,25 @@ const styles=StyleSheet.create({
         elevation:RFValue(10),
         marginTop:THEME.MARGIN.NORMAL
     },
+    mainContainerDark:{
+        height:RFValue(250),
+        width:RFValue(310),
+        borderRadius:RFValue(10),
+        flexWrap:'wrap',
+        backgroundColor:THEME.COLORS.red,
+        shadowOffset: {  height: 10 },  
+        shadowOpacity: 0.5,
+        elevation:RFValue(10),
+        marginTop:THEME.MARGIN.NORMAL
+    },
     blueColor:{
-        color:THEME.COLORS.blue
+        color:THEME.COLORS.blue,
+        marginTop:THEME.MARGIN.VERYLOW,
+        marginLeft:THEME.MARGIN.VERYLOW
+    },
+    simpleColor:{
+        marginTop:THEME.MARGIN.VERYLOW,
+        marginLeft:THEME.MARGIN.VERYLOW
     },
     postImage:{
         height:RFValue(190),
@@ -60,7 +93,13 @@ const styles=StyleSheet.create({
         borderTopRightRadius:RFValue(10)
     },
     detailView:{
-        backgroundColor:'white',
+        backgroundColor:THEME.COLORS.white,
+        width:RFValue(297),
+        height:RFValue(40),
+        paddingHorizontal:THEME.PADDING.LOW
+    },
+    detailViewDark:{
+        backgroundColor:THEME.COLORS.red,
         width:RFValue(297),
         height:RFValue(40),
         paddingHorizontal:THEME.PADDING.LOW

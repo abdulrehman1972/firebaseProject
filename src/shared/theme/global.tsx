@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
 import {THEME} from '.';
-import {WP} from './responsive';
 
 const GLOBAL_STYLE = StyleSheet.create({
   CENTER: {

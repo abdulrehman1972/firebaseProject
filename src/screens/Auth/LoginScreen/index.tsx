@@ -6,13 +6,24 @@ import styles from './styles';
 import auth from '@react-native-firebase/auth';
 import {THEME} from '../../../shared/theme';
 import Toast from 'react-native-simple-toast';
-import { useNavigation } from '@react-navigation/native';
-const LoginScreen = () => {
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {
+  setEm,
+  setPass,
+} from '../../../shared/store/Reducer/WalletReducer/WalletReducer';
+import {GenericNavigation} from '../../../shared/Modals/types';
+
+interface props extends GenericNavigation {}
+
+const LoginScreen = (props: props) => {
   const [email, setEmail] = useState('abdul.rehman@kryptomind.com');
   const [password, setPassword] = useState('03356278648Bsse@');
   const [isVisible, setVisible] = useState(false);
-  const [passwordVisible,setPassVisible]=useState(false)
-  const navigation=useNavigation()
+  const [passwordVisible, setPassVisible] = useState(true);
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const onLogin = () => {
     setVisible(true);
     let emailVal = email.search('@');
@@ -23,8 +34,9 @@ const LoginScreen = () => {
           console.log('Sign in Successful');
           setVisible(false);
           Toast.show('Sign in Successful', Toast.LONG);
-          navigation.navigate('FeedMain')
-          
+          dispatch(setEm(email));
+          dispatch(setPass(password));
+          navigation.navigate('FeedMain');
         })
         .catch(error => {
           console.log(error);
@@ -33,6 +45,7 @@ const LoginScreen = () => {
         });
     }
   };
+
   return (
     <View style={styles.mainContainer}>
       {isVisible && (
@@ -45,17 +58,18 @@ const LoginScreen = () => {
       <Text style={styles.titleText}>Hello</Text>
       <Text style={styles.descriptionText}>Welcome To FireBase Login</Text>
       <AddressInput
-        placeHolder="Enter Email"
+        placeholder="Enter Email"
         value={email}
-        onChange={text => setEmail(text)}
+        onChangeText={text => setEmail(text)}
       />
       <AddressInput
-        placeHolder="Enter Password"
+        placeholder="Enter Password"
         value={password}
         isPassword
         isVisible={passwordVisible}
-        onPress={()=>setPassVisible(!passwordVisible)}
-        onChange={text => setPassword(text)}
+        secureTextEntry={passwordVisible}
+        onPress={() => setPassVisible(!passwordVisible)}
+        onChangeText={text => setPassword(text)}
       />
       <Text style={styles.forgetText}>forget Password?</Text>
       <View style={styles.buttonContainer}>

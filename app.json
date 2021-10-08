@@ -1,4 +1,5 @@
 {
   "name": "FirebaseApp",
-  "displayName": "FirebaseApp"
+  "displayName": "FirebaseApp",
+  "ios": {"userInterfaceStyle": "automatic"}
 }

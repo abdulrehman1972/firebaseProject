@@ -11,8 +11,8 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2CC4594DE86A65C65340E81E /* libPods-FirebaseApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 159406E604EB245BBE50648F /* libPods-FirebaseApp.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		95555745B5897A8D71D85B69 /* libPods-FirebaseApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 159406E604EB245BBE50648F /* libPods-FirebaseApp.a */; };
 		CC10D141270DEE4D00A9ADDA /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CC10D140270DEE4C00A9ADDA /* fonts */; };
 		CC64DA48270C908500B6A551 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC64DA47270C908500B6A551 /* GoogleService-Info.plist */; };
 		E96306782FBDEB79E6FA4FAB /* libPods-FirebaseApp-FirebaseAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF7E39B9FEF90EC1A93431E0 /* libPods-FirebaseApp-FirebaseAppTests.a */; };
@@ -63,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CC4594DE86A65C65340E81E /* libPods-FirebaseApp.a in Frameworks */,
+				95555745B5897A8D71D85B69 /* libPods-FirebaseApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
