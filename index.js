@@ -5,15 +5,23 @@
 import {AppRegistry} from 'react-native';
 import App from './App';
 import {name as appName} from './app.json';
-import PushController from './src/screens/PushNotification';
-import React from 'react';
-const First = () => {
-  return (
-    <>
-      <App />
-      <PushController />
-    </>
-  );
-};
+import PushNotification from 'react-native-push-notification';
 
-AppRegistry.registerComponent(appName, () => First);
+import React from 'react';
+PushNotification.configure({
+  onRegister: function (token) {
+    console.log('TOKEN:', token);
+  },
+  onNotification: function (notification) {
+    console.log('NOTIFICATION:', notification);
+  },
+  permissions: {
+    alert: true,
+    badge: true,
+    sound: true,
+  },
+  popInitialNotification: true,
+  requestPermissions: true,
+});
+
+AppRegistry.registerComponent(appName, () => App);

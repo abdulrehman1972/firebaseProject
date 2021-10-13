@@ -11,8 +11,11 @@ import {useDispatch} from 'react-redux';
 import {
   setEm,
   setPass,
+  setUserId,
 } from '../../../shared/store/Reducer/WalletReducer/WalletReducer';
 import {GenericNavigation} from '../../../shared/Modals/types';
+import base64 from 'react-native-base64';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface props extends GenericNavigation {}
 
@@ -22,7 +25,16 @@ const LoginScreen = (props: props) => {
   const [isVisible, setVisible] = useState(false);
   const [passwordVisible, setPassVisible] = useState(true);
   const navigation = useNavigation();
+  const [user, setAsyncUser] = useState({});
   const dispatch = useDispatch();
+
+  const handlePress = async () => {
+    let _id = base64.encode(email);
+    let userLocal = {id: _id, email: email};
+    dispatch(setUserId(_id));
+    await AsyncStorage.setItem('user', JSON.stringify(userLocal));
+    setAsyncUser(userLocal);
+  };
 
   const onLogin = () => {
     setVisible(true);
@@ -36,6 +48,7 @@ const LoginScreen = (props: props) => {
           Toast.show('Sign in Successful', Toast.LONG);
           dispatch(setEm(email));
           dispatch(setPass(password));
+          handlePress();
           navigation.navigate('FeedMain');
         })
         .catch(error => {

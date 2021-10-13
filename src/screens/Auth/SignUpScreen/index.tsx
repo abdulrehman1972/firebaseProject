@@ -13,7 +13,10 @@ import {
   setEm,
   setPass,
   setUser,
+  setUserId,
 } from '../../../shared/store/Reducer/WalletReducer/WalletReducer';
+import base64 from 'react-native-base64';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface props extends GenericNavigation {}
 
@@ -25,8 +28,16 @@ const LoginScreen = (props: props) => {
   const [confirmPassVisible, setConfirmPassVisible] = useState(true);
   const [userName, setUserName] = useState('Abdul Rehman');
   const [isVisible, setVisible] = useState(false);
+  const [user, setAsyncUser] = useState({});
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const handlePress = async () => {
+    let _id = base64.encode(email);
+    let userLocal = {id: _id, email: email};
+    dispatch(setUserId(_id));
+    await AsyncStorage.setItem('user', JSON.stringify(userLocal));
+    setAsyncUser(userLocal);
+  };
 
   const onSignUp = () => {
     setVisible(true);
@@ -40,6 +51,7 @@ const LoginScreen = (props: props) => {
           dispatch(setEm(email));
           dispatch(setPass(password));
           dispatch(setUser(userName));
+          handlePress();
           navigation.navigate('LoginScreen');
           setVisible(false);
         })

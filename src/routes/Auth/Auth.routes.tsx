@@ -6,6 +6,7 @@ import AuthTopTab from '../../screens/Auth/TopTab';
 import FeedMain from '../../screens/feed/FeedMain';
 import AddingPost from '../../screens/feed/AddingPost/index';
 import SettingMain from '../../screens/Settings/SettingMain';
+import AddComment from '../../screens/feed/AddComment';
 
 const Stack = createNativeStackNavigator();
 interface props {}
@@ -22,6 +23,7 @@ const AuthStack = (props: props) => {
       <Stack.Screen name="FeedMain" component={FeedMain} />
       <Stack.Screen name="AddFeed" component={AddingPost} />
       <Stack.Screen name="SettingMain" component={SettingMain} />
+      <Stack.Screen name="AddComment" component={AddComment} />
     </Stack.Navigator>
   );
 };

@@ -34,7 +34,6 @@ const FeedMain = (props: props) => {
   const fromFirebase = async () => {
     await firestore()
       .collection('Users')
-      .where('email', '==', email)
       .onSnapshot(d => {
         data = d._docs;
         console.log(data);
@@ -102,6 +101,7 @@ const FeedMain = (props: props) => {
               key={i}
               uri={item['_data'].url}
               postContent={item['_data'].textStatus}
+              onPressComment={() => props?.navigation?.navigate('AddComment')}
             />
           ))}
       </View>
